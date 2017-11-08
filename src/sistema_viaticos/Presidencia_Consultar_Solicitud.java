@@ -21,12 +21,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author AMON-RA
  */
-public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
+public class Presidencia_Consultar_Solicitud extends javax.swing.JFrame {
 
     /**
      * Creates new form Direccion_Principal
      */
-    public Secretaria_Consultar_Solicitud() {
+    public Presidencia_Consultar_Solicitud() {
         initComponents();
         Cargar();
         jTable1.setDefaultRenderer(Object.class, new MessageCellRenderer());
@@ -44,9 +44,9 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
     
     ResultSet res;
     
-    res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Lugar,Fecha,Motivo\n" +
+    res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Lugar,Fecha,Motivo,Salida\n" +
 "  from Solicitud_Viaticos S, Personal P\n" +
-"  where (s.Comisionado = p.Id_Personal) and (s.Status='Desarrollo')");
+"  where (s.Comisionado = p.Id_Personal) and (s.Status='Solicitado')");
     
     JButton btn = new JButton("Seleccionar");
     btn.setName("Seleccionar");
@@ -60,6 +60,7 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
         v.add(res.getString(3));
         v.add(res.getString(4));
         v.add(res.getString(5));
+        v.add(res.getString(6));
         v.add(btn);
         
       
@@ -114,10 +115,9 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,17 +171,17 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Folio", "Comisionado", "Lugar", "Fecha Solicita", "Motivo", "Seleccionar"
+                "Folio", "Comisionado", "Lugar", "Fecha Solicita", "Motivo", "Salida", "Seleccionar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -197,7 +197,7 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.darkGray, java.awt.Color.darkGray));
 
-        jButton3.setText("Modificar");
+        jButton3.setText("Aceptar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -235,23 +235,19 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
+        jTextArea2.setEnabled(false);
         jScrollPane3.setViewportView(jTextArea2);
 
-        jCheckBox1.setText("Si / No");
-
-        jButton5.setText("Enviar");
+        jButton5.setText("Rechazar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Limpiar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
+        jTextField6.setEnabled(false);
+
+        jTextField7.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -286,27 +282,23 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextField7))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)))
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(305, 305, 305)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -318,18 +310,18 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox1)))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -343,11 +335,10 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton5))
                 .addContainerGap())
         );
 
@@ -406,7 +397,7 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Secretaria_Consultar_Solicitud so = new Secretaria_Consultar_Solicitud();
+Presidencia_Consultar_Solicitud so = new Presidencia_Consultar_Solicitud();
 so.setVisible(true);
 hide();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -447,6 +438,9 @@ hide();        // TODO add your handling code here:
                     jTextField4.setText(lugar); //lugar
                     jTextArea1.setText(motivo); //motivo
                     
+                    
+                    //agregar los valores de cantidad, pernoctado, actividad y fecha
+                    
                     try{
     Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
     Statement st = cn.createStatement();
@@ -461,14 +455,11 @@ hide();        // TODO add your handling code here:
     while(res.next()){
         
         
-                    jDateChooser1.setDate(res.getDate(1)); //fecha salida
+                     jTextField7.setText(res.getString(1)); //fecha salida
                     jTextArea2.setText(res.getString(2)); //actividad
-                    String a= res.getString(3);
-                    if(a.equals("No")){
-jCheckBox1.setSelected(false);
-} else {
-    jCheckBox1.setSelected(true);
-        }
+                     jTextField6.setText(res.getString(3));
+                   
+                    
        
     }//while
     
@@ -480,11 +471,6 @@ jCheckBox1.setSelected(false);
     {
         JOptionPane.showMessageDialog(null,i);
     }
-                    
-                   
-                    
-                    //tomar los valores de cantidad, pernoctado, actividad y fecha
-                    
               
                     
                     
@@ -502,36 +488,52 @@ jCheckBox1.setSelected(false);
 JOptionPane.showMessageDialog(this,"Solicitud no seleccionada","Informacion",JOptionPane.INFORMATION_MESSAGE);
 
 }  else{
-int dia = jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);  // Dia
-int mes = jDateChooser1.getCalendar().get(Calendar.MONTH)+1; // MES por que va de 0 a 11
-int año = jDateChooser1.getCalendar().get(Calendar.YEAR ); // Año﻿
-        
-String pernoctado;
 
-if(jCheckBox1.isSelected()==true){
- pernoctado="Si";
-} else {
-     pernoctado="No";
-        }
         
       String fo = jTextField1.getText();
         
-        String actividad = jTextArea2.getText(); //actividad
-        String fecha = año+"-"+mes+"-"+dia; //año mes dia
         
         try{
     Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+   
+    Statement stt = cn.createStatement();
+    
+   ResultSet res;
+    
+    res = stt.executeQuery("select Id_Personal\n" +
+"  from Personal\n" +
+"  where Usuario='"+ Login.autoriza +"'");
+    
+    int au = 0;
+    
+    while(res.next()){
+         au = res.getInt(1);
+    
+    }
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
-"    SET Actividad = '"+actividad+"', Pernoctado = '"+pernoctado+"', Salida = '"+fecha+"'\n" +
+"    SET Status ='Aceptado',Autorizado="+ au +  "\n" +
 "    WHERE Id_Solicitud_Viaticos ='"+fo+"'");
    
-JOptionPane.showMessageDialog(this,"Solicitud Modificada","Informacion",JOptionPane.INFORMATION_MESSAGE);
+JOptionPane.showMessageDialog(this,"Solicitud Aceptada","Informacion",JOptionPane.INFORMATION_MESSAGE);
+
+Cargar();
+ jTable1.setDefaultRenderer(Object.class, new MessageCellRenderer());
+ 
+ jTextField1.setText(null);
+ jTextField2.setText(null);
+ jTextField3.setText(null);
+ jTextField4.setText(null);
+ 
+ jTextArea1.setText(null);
+ jTextArea2.setText(null);
+ jTextField6.setText(null);
+ jTextField7.setText(null);
 
 } catch(SQLException i)
     {
-        JOptionPane.showMessageDialog(this,"Fecha no valida","Error",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,"Error","Error",JOptionPane.INFORMATION_MESSAGE);
     } // Hacer insercion
 
 // TODO add your handling code here:
@@ -540,21 +542,40 @@ JOptionPane.showMessageDialog(this,"Solicitud Modificada","Informacion",JOptionP
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        if(jTextField1.getText().isEmpty()||jTextArea2.getText().isEmpty()||jDateChooser1.getDate()==null){
+        if(jTextField1.getText().isEmpty()){
         
-             JOptionPane.showMessageDialog(this,"Llena todos los campos para enviar","Error",JOptionPane.INFORMATION_MESSAGE);
+             JOptionPane.showMessageDialog(this,"Solicitud no seleccionada","Error",JOptionPane.INFORMATION_MESSAGE);
              
         }else{
         
               try{
     Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
     
+    Statement stt = cn.createStatement();
+    
+   ResultSet res;
+    
+    res = stt.executeQuery("select Id_Personal\n" +
+"  from Personal\n" +
+"  where Usuario='"+ Login.autoriza +"'");
+    
+    
+    
+       int au = 0;
+    
+    while(res.next()){
+         au = res.getInt(1);
+    
+    }
+    
+    
+    
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
-"    SET Status ='Solicitado'\n" +
+"    SET Status ='Rechazado',Autorizado="+ au +  "\n" +
 "    WHERE Id_Solicitud_Viaticos ='"+folio+"'");
    
-JOptionPane.showMessageDialog(this,"Solicitud Enviada","Informacion",JOptionPane.INFORMATION_MESSAGE);
+JOptionPane.showMessageDialog(this,"Solicitud Rechazada","Informacion",JOptionPane.INFORMATION_MESSAGE);
 
  Cargar();
  jTable1.setDefaultRenderer(Object.class, new MessageCellRenderer());
@@ -563,36 +584,24 @@ JOptionPane.showMessageDialog(this,"Solicitud Enviada","Informacion",JOptionPane
  jTextField2.setText(null);
  jTextField3.setText(null);
  jTextField4.setText(null);
-
+ 
  jTextArea1.setText(null);
  jTextArea2.setText(null);
- jDateChooser1.setDate(null);
- jCheckBox1.setSelected(false);
-
+ jTextField6.setText(null);
+ jTextField7.setText(null);
+ 
  //poner todo vacio
  
  
  
 } catch(SQLException i)
     {
-        JOptionPane.showMessageDialog(this,"Fecha no valida","Error",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,"Error","Error",JOptionPane.INFORMATION_MESSAGE);
     }
             
         }
         
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-jTextField1.setText(null);
- jTextField2.setText(null);
- jTextField3.setText(null);
- jTextField4.setText(null);
- 
- jTextArea1.setText(null);
- jTextArea2.setText(null);
- jDateChooser1.setDate(null);
- jCheckBox1.setSelected(false);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     
     /**
@@ -612,14 +621,18 @@ jTextField1.setText(null);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presidencia_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presidencia_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presidencia_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presidencia_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -628,7 +641,7 @@ jTextField1.setText(null);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Secretaria_Consultar_Solicitud().setVisible(true);
+                new Presidencia_Consultar_Solicitud().setVisible(true);
             }
         });
     }
@@ -639,9 +652,6 @@ jTextField1.setText(null);
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -664,5 +674,7 @@ jTextField1.setText(null);
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

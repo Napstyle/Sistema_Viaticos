@@ -5,108 +5,18 @@
  */
 package sistema_viaticos;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author AMON-RA
  */
-public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
+public class Comisionado_Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Direccion_Principal
      */
-    public Direccion_Consultar_Solicitud() {
+    public Comisionado_Principal() {
         initComponents();
-        Cargar();
     }
-    
-    public void Cargar(){
-    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel(); 
-    modelo.setRowCount(0);
-    
-    try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
-    Statement st = cn.createStatement();
-    
-    ResultSet res;
-    
-    res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Salida,Lugar,Actividad,Vehiculo,Fecha,Motivo,Cantidad,Autorizado,Pernoctado,S.Status\n" +
-"  from Solicitud_Viaticos S, Personal P\n" +
-"  where (s.Comisionado = p.Id_Personal) and (s.Status='Desarrollo' or s.Status='Solicitado')");
-    while(res.next()){
-        Vector v = new Vector();
-        v.add(res.getInt(1));
-        v.add(res.getString(2));
-        v.add(res.getString(3));
-        v.add(res.getString(4));
-        v.add(res.getString(5));
-        v.add(res.getString(6));
-        v.add(res.getString(7));
-        v.add(res.getString(8));
-        v.add(res.getString(9));
-        v.add(res.getString(10));
-        v.add(res.getString(11));
-        v.add(res.getString(12));
-        modelo.addRow(v);
-        jTable1.setModel(modelo);
-    }//while
-    
-        res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Salida,Lugar,Actividad,vehiculo,Fecha,Motivo,Cantidad,P2.Nombre,Pernoctado,S.Status\n" +
-"    from Solicitud_Viaticos S, Personal P, Personal P2\n" +
-"    where s.Comisionado = p.Id_Personal and s.Autorizado = p2.Id_Personal and (s.Status='Aceptado' or s.Status='Rechazado')");
-    while(res.next()){
-        Vector v = new Vector();
-        v.add(res.getInt(1));
-        v.add(res.getString(2));
-        v.add(res.getString(3));
-        v.add(res.getString(4));
-        v.add(res.getString(5));
-        v.add(res.getString(6));
-        v.add(res.getString(7));
-        v.add(res.getString(8));
-        v.add(res.getString(9));
-        v.add(res.getString(10));
-        v.add(res.getString(11));
-        v.add(res.getString(12));
-        modelo.addRow(v);
-        jTable1.setModel(modelo);
-    }//while
-    
-        res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Salida,Lugar,Actividad,A.Matricula,Fecha,Motivo,Cantidad,P.Nombre,Pernoctado,S.Status\n" +
-"   from Solicitud_Viaticos S, Personal P, Autos A, Personal P2\n" +
-"   where s.Comisionado = p.Id_Personal and s.Vehiculo = a.Id_Auto and s.Autorizado = p2.Id_Personal and (s.Status='Entregado' or s.Status='Finalizado')");
-    while(res.next()){
-        Vector v = new Vector();
-        v.add(res.getInt(1));
-        v.add(res.getString(2));
-        v.add(res.getString(3));
-        v.add(res.getString(4));
-        v.add(res.getString(5));
-        v.add(res.getString(6));
-        v.add(res.getString(7));
-        v.add(res.getString(8));
-        v.add(res.getString(9));
-        v.add(res.getString(10));
-        v.add(res.getString(11));
-        v.add(res.getString(12));
-        modelo.addRow(v);
-        jTable1.setModel(modelo);
-    }//while
-    
-    } catch(SQLException i)
-    {
-        JOptionPane.showMessageDialog(null,i);
-    }
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,12 +31,9 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,24 +41,17 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.gray, java.awt.Color.gray));
 
-        jButton1.setText("Solicitudes vehiculares");
+        jButton1.setText("Informe Vehicular");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Solicitudes de viaticos");
+        jButton2.setText("Comisiones");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Solicitar Solicitud");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -162,7 +62,7 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Informes");
+        jButton5.setText("Informe De Viaticos");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -174,7 +74,6 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,9 +81,7 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,21 +92,8 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Solicitudes De Viaticos");
+        jLabel1.setText("Bienvenido Comisionado");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Folio", "Comisionado", "Fecha Salida", "Lugar", "Actividad", "Vehiculo", "Fecha Solicita", "Motivo", "Cantidad", "Autoriza", "Pernoctado", "Status"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,15 +101,9 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1)
-                        .addGap(24, 24, 24))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(jLabel1)
-                        .addContainerGap(364, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,19 +111,14 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,16 +133,10 @@ public class Direccion_Consultar_Solicitud extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- Direccion_Consultar_Solicitud so = new Direccion_Consultar_Solicitud();
-so.setVisible(true);
-hide();        // TODO add your handling code here:
+Comisionado_Comisiones lo = new Comisionado_Comisiones();
+lo.setVisible(true);
+hide();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-Direccion_Solicitar so = new Direccion_Solicitar();
-so.setVisible(true);
-hide();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 Login lo = new Login();
@@ -298,21 +165,27 @@ hide();        // TODO add your handling code here:
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Direccion_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Direccion_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Direccion_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Direccion_Consultar_Solicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Direccion_Consultar_Solicitud().setVisible(true);
+                new Comisionado_Principal().setVisible(true);
             }
         });
     }
@@ -320,13 +193,10 @@ hide();        // TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

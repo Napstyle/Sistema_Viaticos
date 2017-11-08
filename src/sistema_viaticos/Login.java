@@ -135,7 +135,7 @@ conexion conectar = new conexion();
 Statement st =  conectar.Conectar();
 try{
     
-    ResultSet tpd= st.executeQuery("select*from Usuarios where Usuario ='"+usuario+"' and Contraseña ='"+contraseña+"' and Tipo ='Presidencia'");
+    ResultSet tpd= st.executeQuery("select*from Usuarios where Usuario ='"+usuario+"' and Contraseña ='"+contraseña+"' and Tipo ='Comisionado'");
 tpd.last();
 int com = tpd.getRow(); 
 
@@ -162,7 +162,7 @@ if(encontrado==1){
 
     if(dir==1){
 JOptionPane.showMessageDialog(null,"Usuario y Contraseña Correcta","",JOptionPane.INFORMATION_MESSAGE);
-
+ autoriza = usuario;
 Direccion_Principal dpl = new Direccion_Principal();
 dpl.setVisible(true);
 hide();
@@ -170,7 +170,7 @@ hide();
     
     if(adm==1){
 JOptionPane.showMessageDialog(null,"Usuario y Contraseña Correcta","",JOptionPane.INFORMATION_MESSAGE);
-
+autoriza = usuario;
 Administracion_Principal dpl = new Administracion_Principal();
 dpl.setVisible(true);
 hide();
@@ -178,7 +178,7 @@ hide();
     
   if(sec==1){
 JOptionPane.showMessageDialog(null,"Usuario y Contraseña Correcta","",JOptionPane.INFORMATION_MESSAGE);
-
+autoriza = usuario;
 Secretaria_Principal dpl = new Secretaria_Principal();
 dpl.setVisible(true);
 hide();
@@ -186,7 +186,7 @@ hide();
   
   if(pre==1){
 JOptionPane.showMessageDialog(null,"Usuario y Contraseña Correcta","",JOptionPane.INFORMATION_MESSAGE);
-
+autoriza = usuario;
 Presidencia_Principal dpl = new Presidencia_Principal();
 dpl.setVisible(true);
 hide();
@@ -194,8 +194,8 @@ hide();
     
     if(com==1){
 JOptionPane.showMessageDialog(null,"Usuario y Contraseña Correcta","",JOptionPane.INFORMATION_MESSAGE);
-
-Comicionado_Principal dpl = new Comicionado_Principal();
+autoriza = usuario;
+Comisionado_Principal dpl = new Comisionado_Principal();
 dpl.setVisible(true);
 hide();
 }     
@@ -247,7 +247,7 @@ JOptionPane.showMessageDialog(null,"Usuario y Contraseña Incorrecta","Error",JO
             }
         });
     }
-
+    static String autoriza = "";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField Campo_contra;
     private javax.swing.JTextField Campo_usu;
