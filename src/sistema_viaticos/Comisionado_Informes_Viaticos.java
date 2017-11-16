@@ -22,12 +22,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author AMON-RA
  */
-public class Comisionado_Comisiones extends javax.swing.JFrame {
+public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
 
     /**
      * Creates new form Direccion_Principal
      */
-    public Comisionado_Comisiones() {
+    public Comisionado_Informes_Viaticos() {
         initComponents();
         Cargar();
         jTable1.setDefaultRenderer(Object.class, new MessageCellRenderer());
@@ -57,11 +57,16 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
     
     }
     
+    Statement sta = cn.createStatement();
+    int rsa = sta.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
+"    SET Status = 'Completado' \n" +
+"    WHERE (Status='Entregado') and (Comisionado="+au+")and (GETDATE()>Salida)");
+    
     Statement st = cn.createStatement();
     ResultSet res;
     res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Lugar,Fecha,Motivo,Salida\n" +
 "  from Solicitud_Viaticos S, Personal P\n" +
-"  where (s.Comisionado = p.Id_Personal) and (s.Status='Entregado') and (Comisionado="+au+")");
+"  where (s.Comisionado = p.Id_Personal) and (s.Status='Completado') and (Comisionado="+au+")and (GETDATE()>Salida)");
     
     JButton btn = new JButton("Seleccionar");
     btn.setName("Seleccionar");
@@ -84,6 +89,8 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
     }//while
     
     btn.setEnabled(true);
+    
+
     
     
     } catch(SQLException i)
@@ -188,7 +195,7 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,9 +205,9 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,7 +216,7 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Solicitudes De Viaticos");
+        jLabel1.setText("Informes");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -240,7 +247,7 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.darkGray, java.awt.Color.darkGray));
 
-        jButton3.setText("Estado Del Vehiculo");
+        jButton3.setText("Hacer Informe");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -430,14 +437,14 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1)
                         .addGap(24, 24, 24))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))))
+                        .addGap(107, 107, 107))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(386, 386, 386)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,7 +479,7 @@ public class Comisionado_Comisiones extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 Comisionado_Informes_Viaticos   so = new  Comisionado_Informes_Viaticos();
 so.setVisible(true);
-hide();        // TODO add your handling code here:
+hide(); // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -600,16 +607,15 @@ hide();        // TODO add your handling code here:
        
        
                 
-        if(jTextField10.getText().isEmpty()|| jTextField10.getText().equals("Ninguno   ")){
-JOptionPane.showMessageDialog(this,"Sin Vehiculo Asignado","Informacion",JOptionPane.INFORMATION_MESSAGE);
+        if(jTextField1.getText().isEmpty()){
+JOptionPane.showMessageDialog(this,"Sin Comicion Seleccionada","Informacion",JOptionPane.INFORMATION_MESSAGE);
 
 }  else{
             
-vehiculo = jTextField10.getText();
 
-Estado_Vehicular soa = new Estado_Vehicular();
+Comisionado_Hacer_Informe_Viaticos soa = new Comisionado_Hacer_Informe_Viaticos();
 soa.setVisible(true);
-soa.setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+hide();
         //Mostrar estado del vehiculo
         
 
@@ -620,7 +626,7 @@ soa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 Comisionado_Informe_Vehicular so = new Comisionado_Informe_Vehicular();
         so.setVisible(true);
-        hide();        // TODO add your handling code here:
+        hide();          // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -647,14 +653,46 @@ Comisionado_Informe_Vehicular so = new Comisionado_Informe_Vehicular();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Comisionado_Comisiones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Informes_Viaticos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Comisionado_Comisiones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Informes_Viaticos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Comisionado_Comisiones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Informes_Viaticos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Comisionado_Comisiones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comisionado_Informes_Viaticos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -691,7 +729,7 @@ Comisionado_Informe_Vehicular so = new Comisionado_Informe_Vehicular();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Comisionado_Comisiones().setVisible(true);
+                new Comisionado_Informes_Viaticos().setVisible(true);
             }
         });
     }
