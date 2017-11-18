@@ -218,11 +218,11 @@ JOptionPane.showMessageDialog(this,"Llene todos los campos","Informacion",JOptio
 String fo =jTextField5.getText();
 
         try{
-            Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+             Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
 
             Statement st = cn.createStatement();
             int rs = st.executeUpdate(" insert into Informe_Vehicular (Solicitud_vehicular,Observaciones,Inconvenientes,Kilometraje_Inicio,Kilimetraje_Fin,Fecha)\n" +
-                "    values("+fo+",'"+observaciones+"','"+inconvenientes+"',"+kinicio+", "+kfin+",GETDATE())");
+                "    values("+fo+",'"+observaciones+"','"+inconvenientes+"',"+kinicio+", "+kfin+",CURDATE())");
             
              Statement stt = cn.createStatement();
             int rst = stt.executeUpdate(" Update Solicitud_Vehicular \n" +

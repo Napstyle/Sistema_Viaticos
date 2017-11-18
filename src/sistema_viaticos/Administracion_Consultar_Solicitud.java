@@ -41,7 +41,7 @@ public class Administracion_Consultar_Solicitud extends javax.swing.JFrame {
     modelo.setRowCount(0);
     
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+    Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;
@@ -512,7 +512,7 @@ hide();        // TODO add your handling code here:
                     //agregar los valores de cantidad, pernoctado, actividad y fecha
                     
                     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+    Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;
@@ -524,7 +524,7 @@ hide();        // TODO add your handling code here:
     
     while(res.next()){
         
-        
+                     fechas=res.getString(1);
                      jTextField7.setText(res.getString(1)); //fecha salida
                     jTextArea2.setText(res.getString(2)); //actividad
                      jTextField6.setText(res.getString(3));
@@ -565,7 +565,7 @@ JOptionPane.showMessageDialog(this,"Solicitud no seleccionada","Informacion",JOp
         
         
         try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+   Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
    
     Statement stt = cn.createStatement();
     
@@ -610,10 +610,34 @@ JOptionPane.showMessageDialog(this,"Solicitud no seleccionada","Informacion",JOp
         
     }else{
    
+        Statement sttr = cn.createStatement();
+         ResultSet resr;
+    
+    resr = sttr.executeQuery("select Id_Personal\n" +
+"  from Personal\n" +
+"  where Usuario='"+ Login.autoriza +"'");
+    
+    
+    
+       int au = 0;
+    
+    while(resr.next()){
+         au = resr.getInt(1);
+    
+    }
+    
         Statement sta = cn.createStatement();
     int rsa = sta.executeUpdate(" UPDATE autos\n" +
 "    SET Status ='Solicitado',[Personal a cargo]="+idp+" \n" +
 "    WHERE Id_auto ="+idauto);
+    
+    
+     Statement stb = cn.createStatement();
+    int rsb = stb.executeUpdate(" INSERT INTO Solicitud_Vehicular(Fecha,Status,Autorizado,Motivo,Vehiculo,Fecha_Solicita,Comicionado,Lugar)\n" +
+"values ('"+ fechas +  "','Aceptado',"+ au +  ",'"+ motivo +  "',"+ idauto +  ",CURDATE(),"+idp+",'"+ lugar +  "')");
+    
+    
+    
     
     }
 JOptionPane.showMessageDialog(this,"Solicitud Enviada","Informacion",JOptionPane.INFORMATION_MESSAGE);
@@ -631,6 +655,9 @@ Cargar();
  jTextArea2.setText(null);
  jTextField6.setText(null);
  jTextField7.setText(null);
+ jTextField9.setText(null);
+ jTextField8.setText(null);
+ 
 
 } catch(SQLException i)
     {
@@ -653,7 +680,7 @@ hide();        // TODO add your handling code here:
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
                      try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+    Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement stt = cn.createStatement();
     
@@ -686,7 +713,9 @@ hide();        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+Administracion_Informe_Vehicular so = new Administracion_Informe_Vehicular();
+so.setVisible(true);
+hide();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
     
@@ -739,6 +768,9 @@ hide();        // TODO add your handling code here:
             }
         });
     }
+    String lugar;
+        String fechas;
+        String motivo;
     int folio;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -98,6 +98,11 @@ public class Direccion_Solicitar extends javax.swing.JFrame {
         });
 
         jButton7.setText("Informes Vehiculares");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Solicitar Vehiculo");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -301,7 +306,7 @@ jTextField1.requestFocus();
 jTextArea1.requestFocus();
 }  else{
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+    Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
 String lugar = jTextField1.getText();
 String motivo = jTextArea1.getText();
@@ -310,7 +315,7 @@ String nombre = (String) jComboBox1.getSelectedItem();
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate("INSERT INTO  Solicitud_Viaticos(Comisionado,Motivo,Lugar,Status,Fecha)\n" +
-"    SELECT Id_Personal, '"+motivo+"','"+lugar+"','Desarrollo',getdate()\n" +
+"    SELECT Id_Personal, '"+motivo+"','"+lugar+"','Desarrollo',CURDATE()\n" +
 "    FROM Personal\n" +
 "    WHERE Nombre='"+nombre+"'");
    
@@ -337,6 +342,12 @@ JOptionPane.showMessageDialog(this,"Solicitud Enviada","Informacion",JOptionPane
         so.setVisible(true);
         hide();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+Direccion_Informe_Vehicular lo = new Direccion_Informe_Vehicular();
+        lo.setVisible(true);
+        hide();          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

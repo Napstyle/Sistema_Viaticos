@@ -40,7 +40,7 @@ public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
     modelo.setRowCount(0);
     
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
    
     Statement stt = cn.createStatement();
     
@@ -60,13 +60,13 @@ public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
     Statement sta = cn.createStatement();
     int rsa = sta.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
 "    SET Status = 'Completado' \n" +
-"    WHERE (Status='Entregado') and (Comisionado="+au+")and (GETDATE()>Salida)");
+"    WHERE (Status='Entregado') and (Comisionado="+au+")and (CURDATE()>Salida)");
     
     Statement st = cn.createStatement();
     ResultSet res;
     res = st.executeQuery("select Id_Solicitud_Viaticos,P.Nombre,Lugar,Fecha,Motivo,Salida\n" +
 "  from Solicitud_Viaticos S, Personal P\n" +
-"  where (s.Comisionado = p.Id_Personal) and (s.Status='Completado') and (Comisionado="+au+")and (GETDATE()>Salida)");
+"  where (s.Comisionado = p.Id_Personal) and (s.Status='Completado') and (Comisionado="+au+")and (CURDATE()>Salida)");
     
     JButton btn = new JButton("Seleccionar");
     btn.setName("Seleccionar");
@@ -247,7 +247,7 @@ public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.darkGray, java.awt.Color.darkGray));
 
-        jButton3.setText("Hacer Informe");
+        jButton3.setText("Hacer Informe De Viaticos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -343,16 +343,10 @@ public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
                                 .addComponent(jTextField9))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(76, 76, 76)
-                                        .addComponent(jButton3)
-                                        .addGap(87, 87, 87))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -373,6 +367,10 @@ public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField6)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(335, 335, 335))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,9 +419,9 @@ public class Comisionado_Informes_Viaticos extends javax.swing.JFrame {
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -528,7 +526,7 @@ hide();        // TODO add your handling code here:
                     //agregar los valores de cantidad, pernoctado, actividad y fecha
                     
                     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;

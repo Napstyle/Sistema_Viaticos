@@ -41,7 +41,7 @@ public class Comisionado_Informe_Vehicular extends javax.swing.JFrame {
     modelo.setRowCount(0);
     
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement stt = cn.createStatement();
     
@@ -61,7 +61,7 @@ public class Comisionado_Informe_Vehicular extends javax.swing.JFrame {
     Statement sta = cn.createStatement();
     int rsa = sta.executeUpdate(" UPDATE Solicitud_Vehicular\n" +
 "    SET Status = 'Completado' \n" +
-"    WHERE (Status='Aceptado') and (Comicionado="+au+")and (GETDATE()>Fecha)");
+"    WHERE (Status='Aceptado') and (Comicionado="+au+")and (CURDATE()>Fecha)");
     
     Statement st = cn.createStatement();
     
@@ -69,7 +69,7 @@ public class Comisionado_Informe_Vehicular extends javax.swing.JFrame {
     
     res = st.executeQuery("select s.Id_Solicitud_Vehicular,p.Nombre,s.Lugar,s.Fecha_Solicita,a.Matricula\n" +
 "from Solicitud_Vehicular S, Personal p, Autos a\n" +
-"where (s.Comicionado = p.Id_Personal) and (s.Status='Completado') and (a.Id_Auto=s.Vehiculo) and (s.Comicionado="+au+") and (GETDATE()>s.Fecha)");
+"where (s.Comicionado = p.Id_Personal) and (s.Status='Completado') and (a.Id_Auto=s.Vehiculo) and (s.Comicionado="+au+") and (CURDATE()>s.Fecha)");
     
     JButton btn = new JButton("Seleccionar");
     btn.setName("Seleccionar");
@@ -491,7 +491,7 @@ hide();        // TODO add your handling code here:
                    
                     
                     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;

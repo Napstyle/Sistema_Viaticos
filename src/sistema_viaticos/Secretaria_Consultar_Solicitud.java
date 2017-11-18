@@ -39,7 +39,7 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
     modelo.setRowCount(0);
     
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;
@@ -450,7 +450,7 @@ hide();        // TODO add your handling code here:
                     jTextArea1.setText(motivo); //motivo
                     
                     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;
@@ -522,7 +522,7 @@ if(jCheckBox1.isSelected()==true){
         String fecha = año+"-"+mes+"-"+dia; //año mes dia
         
         try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
@@ -549,7 +549,7 @@ JOptionPane.showMessageDialog(this,"Solicitud Modificada","Informacion",JOptionP
         }else{
         
               try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Viaticos\n" +

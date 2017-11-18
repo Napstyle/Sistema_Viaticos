@@ -102,6 +102,11 @@ public class Direccion_Solicitar_Vehiculos extends javax.swing.JFrame {
         });
 
         jButton7.setText("Informes Vehiculares");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Solicitar Vehiculo");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -323,7 +328,7 @@ jTextField1.requestFocus();
 
 }  else{
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
 
 String vehi="";   
 
@@ -344,10 +349,14 @@ String auto = (String) jComboBox2.getSelectedItem();
         vehi=ress.getString(1);
     }//while
 
+     Statement stq = cn.createStatement();
+    int rsq = stq.executeUpdate("Update  Autos\n" +
+"    SET status='Solicitado'\n" +
+"    WHERE Matricula='"+auto+"'");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate("INSERT INTO  Solicitud_Vehicular(Comicionado,Vehiculo,Lugar,Status,Fecha_Solicita)\n" +
-"    SELECT Id_Personal,"+vehi+",'"+lugar+"','Desarrollo',GETDATE()\n" +
+"    SELECT Id_Personal,"+vehi+",'"+lugar+"','Desarrollo',CURDATE()\n" +
 "    FROM Personal\n" +
 "    WHERE Nombre='"+nombre+"'");
    
@@ -382,7 +391,7 @@ hide();         // TODO add your handling code here:
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
 try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement stt = cn.createStatement();
     
@@ -417,6 +426,12 @@ try{
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+Direccion_Informe_Vehicular lo = new Direccion_Informe_Vehicular();
+        lo.setVisible(true);
+        hide();          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

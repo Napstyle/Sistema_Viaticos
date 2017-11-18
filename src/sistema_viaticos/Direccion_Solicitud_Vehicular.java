@@ -41,7 +41,7 @@ public class Direccion_Solicitud_Vehicular extends javax.swing.JFrame {
     modelo.setRowCount(0);
     
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     
     Statement st = cn.createStatement();
@@ -487,26 +487,40 @@ hide();        // TODO add your handling code here:
                     jTextField3.setText(comisionado);  //comisionado
                     jTextField4.setText(lugar); //lugar
                      jTextField5.setText(matricula); //lugar
+                     
+                     jTextField7.setText(""); //fecha salida
+                   jTextArea2.setText(""); //actividad
+                   jTextField8.setText("");
+                   jTextField9.setText("");
                    
                     
                     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
+    
+     ResultSet ress;
+    
+    ress = st.executeQuery("select p.nombre\n" +
+"  from Solicitud_Vehicular,personal p\n" +
+"  where (id_Solicitud_Vehicular="+folio+" and Autorizado = p.Id_Personal)");
+
+    while(ress.next()){          
+                   jTextField8.setText(ress.getString(1));
+  
+    }//while
     
     ResultSet res;
     
-    res = st.executeQuery("select fecha,motivo,p.nombre,status\n" +
+    res = st.executeQuery("select fecha,motivo,status\n" +
 "  from Solicitud_Vehicular,personal p \n" +
-"  where (id_Solicitud_Vehicular="+folio+" and Autorizado = p.Id_Personal)");
-    
+"  where (id_Solicitud_Vehicular="+folio+")");   
     
     while(res.next()){
         
         
                      jTextField7.setText(res.getString(1)); //fecha salida
                     jTextArea2.setText(res.getString(2)); //actividad
-                   jTextField8.setText(res.getString(3));
-                   jTextField9.setText(res.getString(4));
+                   jTextField9.setText(res.getString(3));
                    
                    
        
@@ -591,7 +605,9 @@ hide();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+Direccion_Informe_Vehicular lo = new Direccion_Informe_Vehicular();
+        lo.setVisible(true);
+        hide();          // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     

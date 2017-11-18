@@ -39,7 +39,7 @@ public class Secretaria_Consultar_Vehiculos extends javax.swing.JFrame {
     modelo.setRowCount(0);
     
     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;
@@ -447,7 +447,7 @@ hide();        // TODO add your handling code here:
                    
                     
                     try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     Statement st = cn.createStatement();
     
     ResultSet res;
@@ -528,7 +528,7 @@ int año = jDateChooser1.getCalendar().get(Calendar.YEAR ); // Año﻿
         String fecha = año+"-"+mes+"-"+dia; //año mes dia
         
         try{
-    Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Vehicular\n" +
@@ -567,7 +567,7 @@ int año = jDateChooser1.getCalendar().get(Calendar.YEAR ); // Año﻿
         String fecha = año+"-"+mes+"-"+dia; //año mes dia
         
               try{
-     Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+      Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Vehicular\n" +

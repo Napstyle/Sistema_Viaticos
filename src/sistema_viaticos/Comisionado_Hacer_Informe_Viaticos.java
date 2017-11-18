@@ -228,11 +228,11 @@ JOptionPane.showMessageDialog(this,"Llene todos los campos","Informacion",JOptio
 String fo =jTextField5.getText();
 
         try{
-            Connection cn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular","sa","aapn941015");
+             Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
 
             Statement st = cn.createStatement();
             int rs = st.executeUpdate(" insert into Informe_Viaticos (Solicitud_viaticos,Improvistos,Gastos_extra,Informe_actividades,Fecha,Comentarios)\n" +
-                "    values("+fo+",'"+improvistos+"',"+cantidad+",'"+actividad+"',GETDATE(), '"+comentarios+"')");
+                "    values("+fo+",'"+improvistos+"',"+cantidad+",'"+actividad+"',CURDATE(), '"+comentarios+"')");
             
              Statement stt = cn.createStatement();
             int rst = stt.executeUpdate(" Update Solicitud_Viaticos \n" +

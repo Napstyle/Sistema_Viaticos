@@ -19,7 +19,7 @@ public class conexion {
     protected Connection getConnection(){
     Connection cn=null;
     try{
-    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    Class.forName("com.mysql.jdbc.Driver").newInstance(); 
     cn=DriverManager.getConnection(url,usuario,password);
     }catch(Exception e){
         System.out.println(e);
@@ -27,9 +27,11 @@ public class conexion {
     return cn;
     }
             
-    public String usuario = "sa";
+      
+            
+    public String usuario = "root";
     public String password = "aapn941015";
-    public String url = "jdbc:sqlserver://localhost:1433;databaseName=Viaticos_Vehicular";
+    public String url = "jdbc:mysql://localhost:3306/Viaticos_Vehicular";
     
     public Connection cn=null;
     public Statement st=null;
