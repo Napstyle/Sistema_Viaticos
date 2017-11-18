@@ -5,6 +5,9 @@
  */
 package sistema_viaticos;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -18,6 +21,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import static sistema_viaticos.Comisionado_Comisiones.vehiculo;
+import static sistema_viaticos.Presidencia_Consultar_Solicitud.folio;
 
 /**
  *
@@ -121,6 +125,7 @@ public class Administracion_Consultar_Vehiculos extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -277,6 +282,13 @@ public class Administracion_Consultar_Vehiculos extends javax.swing.JFrame {
         jTextField7.setEditable(false);
         jTextField7.setEnabled(false);
 
+        jButton9.setText("Solicitud Vehicular");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -310,14 +322,19 @@ public class Administracion_Consultar_Vehiculos extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField6)))
-                        .addGap(302, 302, 302)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(jTextField7)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(302, 302, 302)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(jTextField7)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(jButton9))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(315, 315, 315)
                         .addComponent(jButton3)
@@ -364,7 +381,8 @@ public class Administracion_Consultar_Vehiculos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -715,6 +733,41 @@ hide();         // TODO add your handling code here:
         hide();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+if(jTextField1.getText().isEmpty()){
+        
+             JOptionPane.showMessageDialog(this,"Solicitud no seleccionada","Error",JOptionPane.INFORMATION_MESSAGE);
+             
+        }else{
+     
+     
+     String encabezado ="\nSolicitud Vehicular"; 
+     String pie ="\n\n\n\n\n\n_____________________________\nFirma del Jefe del departamento"; 
+     
+     String fol ="\n\nFolio: "+jTextField1.getText(); 
+     String fecha ="\nFecha de la solicitud: "+jTextField2.getText(); 
+      String comisionado ="\n\nPor medio de este documento se solicita la autorizacion del vehiculo "+jTextField5.getText()+" con matricula "+jTextField6.getText()+" para el personal "+jTextField3.getText()+" , en virtud de los viaticos que se le fueron asignados para llevar a cabo su actividad. "; 
+       String lugar ="\nQue se llevara a cabo en el lugar: "+jTextField4.getText(); 
+        String motivo ="\n"; 
+         String pernoctado ="\n"; 
+          String fechas ="\nTendra lugar a partir del día: "+jTextField7.getText(); 
+           String actividad ="\nLlevando a cabo las actividades de: "+jTextArea2.getText(); 
+           String auto="";
+           String ruta ="OficioVehicular"+folio+".pdf";    
+
+        GenerarPDF g = new GenerarPDF();
+g.generarPDF(ruta, encabezado, pie, fol, fecha, comisionado, lugar, motivo, pernoctado, fechas, actividad,auto);
+
+try {
+     File path = new File ("OficioVehicular"+folio+".pdf");
+     Desktop.getDesktop().open(path);
+}catch (IOException ex) {
+     ex.printStackTrace();
+}
+
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -775,6 +828,7 @@ hide();         // TODO add your handling code here:
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
