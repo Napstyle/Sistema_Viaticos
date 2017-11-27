@@ -93,7 +93,6 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -122,6 +121,8 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jLabel12 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,13 +132,6 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.gray, java.awt.Color.gray));
-
-        jButton1.setText("Solicitudes vehiculares");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("Solicitudes de viaticos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +154,6 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
@@ -172,11 +165,9 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel11)
-                .addGap(37, 37, 37)
+                .addGap(64, 64, 64)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(103, 103, 103)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(153, Short.MAX_VALUE))
         );
@@ -260,6 +251,7 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextArea2);
 
         jCheckBox1.setText("Si / No");
+        jCheckBox1.setEnabled(false);
 
         jButton5.setText("Enviar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +266,8 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
+
+        jLabel12.setText("Fecha Regreso");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -317,7 +311,11 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(jLabel7)
@@ -335,15 +333,19 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel9)
+                        .addComponent(jCheckBox1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox1)))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -351,8 +353,8 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10))
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel12))
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -366,7 +368,7 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(26, Short.MAX_VALUE))
+                        .addContainerGap(27, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -396,12 +398,6 @@ public class Secretaria_Consultar_Solicitud extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-Secretaria_Consultar_Vehiculos so = new Secretaria_Consultar_Vehiculos();
-so.setVisible(true);
-hide();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 Secretaria_Consultar_Solicitud so = new Secretaria_Consultar_Solicitud();
@@ -451,7 +447,7 @@ hide();        // TODO add your handling code here:
     
     ResultSet res;
     
-    res = st.executeQuery("select salida,actividad,pernoctado\n" +
+    res = st.executeQuery("select salida,actividad,pernoctado,regreso\n" +
 "  from Solicitud_Viaticos \n" +
 "  where (id_Solicitud_Viaticos="+folio+")");
     
@@ -467,7 +463,7 @@ jCheckBox1.setSelected(false);
 } else {
     jCheckBox1.setSelected(true);
         }
-       
+        jDateChooser2.setDate(res.getDate(4));
     }//while
     
                    
@@ -500,10 +496,52 @@ jCheckBox1.setSelected(false);
 JOptionPane.showMessageDialog(this,"Solicitud no seleccionada","Informacion",JOptionPane.INFORMATION_MESSAGE);
 
 }  else{
+           
+            if(jDateChooser1.getDate()==null||jDateChooser2.getDate()==null){
+                
+                JOptionPane.showMessageDialog(this,"Introduce fecha correcta","Informacion",JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            else{
 int dia = jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);  // Dia
 int mes = jDateChooser1.getCalendar().get(Calendar.MONTH)+1; // MES por que va de 0 a 11
 int año = jDateChooser1.getCalendar().get(Calendar.YEAR ); // Año﻿
+
+int dia1 = jDateChooser2.getCalendar().get(Calendar.DAY_OF_MONTH);  // Dia
+int mes1 = jDateChooser2.getCalendar().get(Calendar.MONTH)+1; // MES por que va de 0 a 11
+int año1 = jDateChooser2.getCalendar().get(Calendar.YEAR ); // Año﻿
+
+if(año1>=año){
+
+    if(mes1>=mes){
+
+        if(dia1>=dia){
+            
+            if(año1==año){
+           
+                if(mes1==mes){
+           
+                    if(dia1==dia){
+           
+             jCheckBox1.setSelected(false);
+            }else{
+            
+            jCheckBox1.setSelected(true);
+            }
+            
+            }else{
+            
+            jCheckBox1.setSelected(true);
+            }
+            
+            }else{
+            
+            jCheckBox1.setSelected(true);
+            }
+            
+            
         
+
 String pernoctado;
 
 if(jCheckBox1.isSelected()==true){
@@ -517,35 +555,109 @@ if(jCheckBox1.isSelected()==true){
         String actividad = jTextArea2.getText(); //actividad
         String fecha = año+"-"+mes+"-"+dia; //año mes dia
         
+        String fechar = año1+"-"+mes1+"-"+dia1; //año mes dia
+        
         try{
      Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
-"    SET Actividad = '"+actividad+"', Pernoctado = '"+pernoctado+"', Salida = '"+fecha+"'\n" +
+"    SET Actividad = '"+actividad+"', Pernoctado = '"+pernoctado+"', Salida = '"+fecha+"',Regreso='"+fechar+"'\n" +
 "    WHERE Id_Solicitud_Viaticos ='"+fo+"'");
    
 JOptionPane.showMessageDialog(this,"Solicitud Modificada","Informacion",JOptionPane.INFORMATION_MESSAGE);
 
-} catch(SQLException i)
+} catch(Exception i)
     {
         JOptionPane.showMessageDialog(this,"Fecha no valida","Error",JOptionPane.INFORMATION_MESSAGE);
     } // Hacer insercion
+        
+}
+else{JOptionPane.showMessageDialog(this,"Fecha de Regreso menor a fecha de Salida","Informacion",JOptionPane.INFORMATION_MESSAGE);}
+        
 
+}
+else{JOptionPane.showMessageDialog(this,"Fecha de Regreso menor a fecha de Salida","Informacion",JOptionPane.INFORMATION_MESSAGE);}
+        
+
+}
+else{JOptionPane.showMessageDialog(this,"Fecha de Regreso menor a fecha de Salida","Informacion",JOptionPane.INFORMATION_MESSAGE);}
+        
+
+            }
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
     }
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        if(jTextField1.getText().isEmpty()||jTextArea2.getText().isEmpty()||jDateChooser1.getDate()==null){
+        if(jTextField1.getText().isEmpty()||jTextArea2.getText().isEmpty()||jDateChooser1.getDate()==null||jDateChooser2.getDate()==null){
         
-             JOptionPane.showMessageDialog(this,"Llena todos los campos para enviar","Error",JOptionPane.INFORMATION_MESSAGE);
+             JOptionPane.showMessageDialog(this,"Llena todos los campos correctamente para enviar","Error",JOptionPane.INFORMATION_MESSAGE);
              
         }else{
         
-              try{
+            int dia = jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);  // Dia
+int mes = jDateChooser1.getCalendar().get(Calendar.MONTH)+1; // MES por que va de 0 a 11
+int año = jDateChooser1.getCalendar().get(Calendar.YEAR ); // Año﻿
+
+int dia1 = jDateChooser2.getCalendar().get(Calendar.DAY_OF_MONTH);  // Dia
+int mes1 = jDateChooser2.getCalendar().get(Calendar.MONTH)+1; // MES por que va de 0 a 11
+int año1 = jDateChooser2.getCalendar().get(Calendar.YEAR ); // Año﻿
+        
+if(año1>=año){
+
+    if(mes1>=mes){
+
+        if(dia1>=dia){
+            
+            if(año1==año){
+           
+                if(mes1==mes){
+           
+                    if(dia1==dia){
+           
+             jCheckBox1.setSelected(false);
+            }else{
+            
+            jCheckBox1.setSelected(true);
+            }
+            
+            }else{
+            
+            jCheckBox1.setSelected(true);
+            }
+            
+            }else{
+            
+            jCheckBox1.setSelected(true);
+            }
+            
+            
+        
+
+String pernoctado;
+
+if(jCheckBox1.isSelected()==true){
+ pernoctado="Si";
+} else {
+     pernoctado="No";
+        }
+        
+      String fo = jTextField1.getText();
+        
+        String actividad = jTextArea2.getText(); //actividad
+        String fecha = año+"-"+mes+"-"+dia; //año mes dia
+        
+        String fechar = año1+"-"+mes1+"-"+dia1; //año mes dia
+        
+        try{
      Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
+    
+    Statement stt = cn.createStatement();
+    int rst = stt.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
+"    SET Actividad = '"+actividad+"', Pernoctado = '"+pernoctado+"', Salida = '"+fecha+"',Regreso='"+fechar+"'\n" +
+"    WHERE Id_Solicitud_Viaticos ='"+fo+"'");
     
     Statement st = cn.createStatement();
     int rs = st.executeUpdate(" UPDATE Solicitud_Viaticos\n" +
@@ -566,6 +678,7 @@ JOptionPane.showMessageDialog(this,"Solicitud Enviada","Informacion",JOptionPane
  jTextArea2.setText(null);
  jDateChooser1.setDate(null);
  jCheckBox1.setSelected(false);
+ jDateChooser2.setDate(null);
 
  //poner todo vacio
  
@@ -575,8 +688,20 @@ JOptionPane.showMessageDialog(this,"Solicitud Enviada","Informacion",JOptionPane
     {
         JOptionPane.showMessageDialog(this,"Fecha no valida","Error",JOptionPane.INFORMATION_MESSAGE);
     }
-            
-        }
+            }
+else{JOptionPane.showMessageDialog(this,"Fecha de Regreso menor a fecha de Salida","Informacion",JOptionPane.INFORMATION_MESSAGE);}
+        
+
+}
+else{JOptionPane.showMessageDialog(this,"Fecha de Regreso menor a fecha de Salida","Informacion",JOptionPane.INFORMATION_MESSAGE);}
+        
+
+}
+else{JOptionPane.showMessageDialog(this,"Fecha de Regreso menor a fecha de Salida","Informacion",JOptionPane.INFORMATION_MESSAGE);}
+        
+
+            }
+        
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -589,7 +714,9 @@ jTextField1.setText(null);
  jTextArea1.setText(null);
  jTextArea2.setText(null);
  jDateChooser1.setDate(null);
- jCheckBox1.setSelected(false);        // TODO add your handling code here:
+ jDateChooser2.setDate(null);
+ jCheckBox1.setSelected(false); 
+ // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     
@@ -632,7 +759,6 @@ jTextField1.setText(null);
     }
     int folio;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -640,9 +766,11 @@ jTextField1.setText(null);
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -15,6 +15,7 @@ import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static sistema_viaticos.Comisionado_Comisiones.folio;
+import static sistema_viaticos.Comisionado_Informes_Viaticos.folio;
 
 /**
  *
@@ -38,7 +39,30 @@ public class Comisionado_Hacer_Informe_Viaticos extends javax.swing.JFrame {
  
         jTextField5.setText(String.valueOf(Comisionado_Informes_Viaticos.folio));
        
+        try{
+     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Viaticos_Vehicular","root","aapn941015");
+    Statement st = cn.createStatement();
     
+    ResultSet res;
+    
+    res = st.executeQuery("select actividad\n" +
+"  from Solicitud_Viaticos \n" +
+"  where (id_Solicitud_Viaticos="+Comisionado_Informes_Viaticos.folio+")");
+    
+    
+    while(res.next()){
+        
+        jTextArea3.setText(res.getString(1));
+                    
+                    
+       //poner matricula y modelo
+    }//while
+ 
+    } catch(SQLException i)
+    {
+        JOptionPane.showMessageDialog(null,i);
+    }
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,6 +123,7 @@ public class Comisionado_Hacer_Informe_Viaticos extends javax.swing.JFrame {
 
         jLabel8.setText("Folio Solicitud");
 
+        jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);

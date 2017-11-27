@@ -170,7 +170,7 @@ public class Direccion_Informe_Viaticos extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Solicitar Solicitud");
+        jButton5.setText("Solicitar Comision");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

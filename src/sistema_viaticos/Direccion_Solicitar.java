@@ -84,7 +84,7 @@ public class Direccion_Solicitar extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Solicitar Solicitud");
+        jButton3.setText("Solicitar Comision");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
